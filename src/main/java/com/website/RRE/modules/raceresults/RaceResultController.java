@@ -21,19 +21,21 @@ public class RaceResultController {
     }
 
     // Retrieve results by driver name
-    @GetMapping("/driver/{name}")
+    @GetMapping("/driverName/{name}")
     public List<RaceResult> getResultsByDriver(@PathVariable String name) {
         return raceResultService.findByDriverName(name);
     }
 
     // Retrieve results by driver rank
-    @GetMapping("/driver/{rank}")
+    @GetMapping("/driverRank/{rank}")
     public List<RaceResult> getResultsByRank(@PathVariable int rank) {
+        List<RaceResult> results = raceResultService.findByDriverRank(rank);
+        System.out.println("Results from DB: " + results);
         return raceResultService.findByDriverRank(rank);
     }
 
     // Retrieve results by car number
-    @GetMapping("/driver/{carNo}")
+    @GetMapping("/driverCarNo/{carNo}")
     public List<RaceResult> getResultsByCarNo(@PathVariable int carNo) {
         return raceResultService.findByDriverCarNo(carNo);
     }
