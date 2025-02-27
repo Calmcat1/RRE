@@ -31,4 +31,5 @@ public class RaceResult {
 
     @JsonProperty("raceResultCarNo")
     private int raceResultCarNo;
+
 }
