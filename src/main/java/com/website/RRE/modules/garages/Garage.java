@@ -19,16 +19,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Garage {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long garageID;
 
     @JsonProperty("garageName")
-    private int garageName;
+    private String garageName;
 
     @JsonProperty("garageSpeciality")
-    private int garageSpeciality;
+    private String garageSpeciality;
 
 //    @JsonProperty("garageLogo")
 //    private int garageLogo; -> future implementation for logo images

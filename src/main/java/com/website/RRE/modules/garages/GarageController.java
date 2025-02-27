@@ -15,7 +15,7 @@ public class GarageController {
     private GarageService garageService;
 
     // Retrieve all garages
-    @GetMapping
+    @GetMapping("/allGarages")
     public List<Garage> getAllGarages() {
         return garageService.findAllGarages();
     }
