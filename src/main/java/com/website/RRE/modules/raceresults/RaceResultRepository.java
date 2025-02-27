@@ -9,8 +9,8 @@ import java.util.List;
 
 @Repository
 public interface RaceResultRepository extends JpaRepository<RaceResult, Long> {
-    List<RaceResult> findByDriverName(String driverName);
-    List<RaceResult> findByDriverCarNo(int driverCarNo);
-    List<RaceResult> findByDriverRank(int driverRank);
+    List<RaceResult> findByRaceResultBestTime(int raceResultBestTime);
+    List<RaceResult> findByRaceResultCarNo(int raceResultCarNo);
+    List<RaceResult> findByRaceResultRank(int raceResultRank);
 }
 

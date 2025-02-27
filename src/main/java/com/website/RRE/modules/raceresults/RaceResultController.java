@@ -20,24 +20,23 @@ public class RaceResultController {
         return raceResultService.findAllResults();
     }
 
-    // Retrieve results by driver name
-    @GetMapping("/driverName/{name}")
-    public List<RaceResult> getResultsByDriver(@PathVariable String name) {
-        return raceResultService.findByDriverName(name);
-    }
-
-    // Retrieve results by driver rank
-    @GetMapping("/driverRank/{rank}")
-    public List<RaceResult> getResultsByRank(@PathVariable int rank) {
-        List<RaceResult> results = raceResultService.findByDriverRank(rank);
-        System.out.println("Results from DB: " + results);
-        return raceResultService.findByDriverRank(rank);
-    }
 
     // Retrieve results by car number
-    @GetMapping("/driverCarNo/{carNo}")
-    public List<RaceResult> getResultsByCarNo(@PathVariable int carNo) {
-        return raceResultService.findByDriverCarNo(carNo);
+    @GetMapping("/raceResultCarNo/{carNo}")
+    public List<RaceResult> getRaceResultsByCarNo(@PathVariable int carNo) {
+        return raceResultService.findByRaceResultCarNo(carNo);
+    }
+
+    // Retrieve results by best time
+    @GetMapping("/raceResultBestTime/{bestTime}")
+    public List<RaceResult> getRaceResultsByBestTime(@PathVariable int bestTime) {
+        return raceResultService.findByRaceResultBestTime(bestTime);
+    }
+
+    // Retrieve results by rank
+    @GetMapping("/raceResultRank/{rank}")
+    public List<RaceResult> getRaceResultsByRank(@PathVariable int rank) {
+        return raceResultService.findByRaceResultRank(rank);
     }
 
     // Save a new race result

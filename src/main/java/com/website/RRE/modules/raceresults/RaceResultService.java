@@ -8,7 +8,7 @@ import java.util.List;
 
 // service layer
 
-// finds driver by rank, carNo, driver_name
+// finds raceResult by rank, carNo, raceResult_name
 @Service
 public class RaceResultService {
 
@@ -19,21 +19,21 @@ public class RaceResultService {
         this.raceResultRepository = raceResultRepository;
     }
 
-
+    // finds all results
     List<RaceResult> findAllResults(){
         return raceResultRepository.findAll();
     }
 
-    List<RaceResult> findByDriverName(String driver) {
-        return raceResultRepository.findByDriverName(driver);
+    List<RaceResult> findByRaceResultCarNo(int raceResultCarNo) {
+        return raceResultRepository.findByRaceResultCarNo(raceResultCarNo);
     }
 
-    List<RaceResult> findByDriverCarNo(int driverCarNo) {
-        return raceResultRepository.findByDriverCarNo(driverCarNo);
+    List<RaceResult> findByRaceResultBestTime(int raceResultBestTime) {
+        return raceResultRepository.findByRaceResultBestTime(raceResultBestTime);
     }
 
-    List<RaceResult> findByDriverRank(int driverRank) {
-        return raceResultRepository.findByDriverRank(driverRank);
+    List<RaceResult> findByRaceResultRank(int raceResultRank){
+        return raceResultRepository.findByRaceResultRank(raceResultRank);
     }
 
     public RaceResult saveResult(RaceResult result) {

@@ -21,20 +21,14 @@ import lombok.Setter;
 public class RaceResult {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long driverID;
+    private long raceResultID;
 
-    @JsonProperty("driverRank")
-    private int driverRank;
+    @JsonProperty("raceResultRank")
+    private int raceResultRank;
 
-    @JsonProperty("driverCarNo")
-    private int driverCarNo;
+    @JsonProperty("raceResultBestTime")
+    private int raceResultBestTime;
 
-    @JsonProperty("driverName")
-    private String driverName;
-
-    @JsonProperty("driverCarMake")
-    private String driverCarMake;
-
-    @JsonProperty("driverBestTime")
-    private int driverBestTime;
+    @JsonProperty("raceResultCarNo")
+    private int raceResultCarNo;
 }
