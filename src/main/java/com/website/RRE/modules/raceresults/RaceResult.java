@@ -1,14 +1,18 @@
 package com.website.RRE.modules.raceresults;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.website.RRE.modules.drivers.Driver;
+import com.website.RRE.modules.garages.Garage;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
 
-// version 1 db table
+
+// version 2 db table
 // entity layer
 
 
@@ -19,6 +23,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RaceResult {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long raceResultID;
@@ -31,5 +36,35 @@ public class RaceResult {
 
     @JsonProperty("raceResultCarNo")
     private int raceResultCarNo;
+
+    @JsonProperty("raceResultEvent")
+    private String raceResultEvent;
+
+    @JsonProperty("raceResultEventActivity")
+    private String raceResultEventActivity;
+
+    @JsonProperty("raceResultYear")
+    private Date raceResultYear;
+
+    // input here references driverID in driver table
+    @JsonProperty("driverID")
+    private Long driverID;
+
+    // input here references garageID in garage table
+    @JsonProperty("garageID")
+    private Long garageID;
+
+//    // rre_driver table for join
+//    @ManyToOne
+//    @JoinColumn(name = "driver_id", referencedColumnName = "garage_id")
+//    private Driver driver;
+//
+//    // garage table
+//    @ManyToOne
+//    @JoinColumn(name = "garage_id", referencedColumnName = "garage_id")
+//    private Garage garage;
+
+
+
 
 }

@@ -3,6 +3,7 @@ package com.website.RRE.modules.garages;
 // Controller layer
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,6 +37,13 @@ public class GarageController {
     @PostMapping("/add-garage")
     public Garage saveGarage(@RequestBody Garage garage) {
         return garageService.saveGarage(garage);
+    }
+
+    // Save multiple garages
+    @PostMapping("/add-garages")
+    public ResponseEntity<List<Garage>> addMultipleGarages(@RequestBody List<Garage> garages) {
+        List<Garage> savedGarages = garageService.saveAll(garages);
+        return ResponseEntity.ok(savedGarages);
     }
 }
 

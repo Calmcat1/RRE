@@ -36,6 +36,10 @@ public class GarageService {
         return garageRepository.save(garage);
     }
 
+    // save multiple garage details
+    public List<Garage> saveAll(List<Garage> garages) {
+        return garageRepository.saveAll(garages);
+    }
 
 
 
