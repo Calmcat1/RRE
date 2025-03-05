@@ -1,2 +1,2 @@
 # RRE
-This is the site for resultsracingke, development ongoing
+This is the backend for resultsracingke, development ongoing
