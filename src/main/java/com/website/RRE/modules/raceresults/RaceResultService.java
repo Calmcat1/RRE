@@ -1,12 +1,12 @@
 package com.website.RRE.modules.raceresults;
 
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 
 // service layer
@@ -24,28 +24,33 @@ public class RaceResultService {
     }
 
     // finds all results
-    List<RaceResult> findAllResults(){
-        return raceResultRepository.findAll();
+    List<Map<String, Object>> findAllRaceResults(){
+        return raceResultRepository.findAllRaceResults();
     }
 
     // find race results by best time
-    Optional<Map<String, Object>> findByRaceResultBestTime(int raceResultBestTime) {
+    List<Map<String, Object>> findByRaceResultBestTime(double raceResultBestTime) {
         return raceResultRepository.findByRaceResultBestTime(raceResultBestTime);
     }
 
     // find race results by rank
-    List<RaceResult> findByRaceResultRank(int raceResultRank){
+    List<Map<String, Object>> findByRaceResultRank(int raceResultRank){
         return raceResultRepository.findByRaceResultRank(raceResultRank);
     }
 
     // find race results by event
-    List<RaceResult> findByRaceResultEvent(String raceResultEvent){
+    List<Map<String, Object>> findByRaceResultEvent(String raceResultEvent){
         return raceResultRepository.findByRaceResultEvent(raceResultEvent);
     }
 
     // find race results by eventActivity
-    List<RaceResult> findByRaceResultEventActivity(String raceResultEventActivity){
-        return raceResultRepository.findByRaceResultEvent(raceResultEventActivity);
+    List<Map<String, Object>> findByRaceResultEventActivity(String raceResultEventActivity){
+        return raceResultRepository.findByRaceResultEventActivity(raceResultEventActivity);
+    }
+
+    // find race results by eventYear
+    List<Map<String, Object>> findByRaceResultYear(String raceResultYear){
+        return raceResultRepository.findByRaceResultYear(raceResultYear);
     }
 
 
@@ -61,9 +66,11 @@ public class RaceResultService {
         return raceResultRepository.saveAll(raceResults);
     }
 
-
-
-
+    //deletes racing events
+    @Transactional
+    public void deleteByRaceResultID(Long raceResultID) {
+        raceResultRepository.deleteById(raceResultID);
+    }
 
 
 }

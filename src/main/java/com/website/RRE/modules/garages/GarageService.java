@@ -1,5 +1,6 @@
 package com.website.RRE.modules.garages;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +42,18 @@ public class GarageService {
         return garageRepository.saveAll(garages);
     }
 
+    // endpoints to be added in v2
+    // deletes garages by garageID
+    @Transactional
+    public List<Garage> deleteByGarageID(Long garageID){
+        return garageRepository.deleteByGarageID(garageID);
+    }
+
+    // deletes garages by garageName
+    @Transactional
+    public List<Garage> deleteByGarageName(String garageName){
+        return garageRepository.deleteByGarageName(garageName);
+    }
 
 
 }

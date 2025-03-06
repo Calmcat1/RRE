@@ -32,7 +32,7 @@ public class RaceResult {
     private int raceResultRank;
 
     @JsonProperty("raceResultBestTime")
-    private int raceResultBestTime;
+    private double raceResultBestTime;
 
     @JsonProperty("raceResultCarNo")
     private int raceResultCarNo;

@@ -1,5 +1,6 @@
 package com.website.RRE.modules.drivers;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -37,6 +38,19 @@ public class DriverService {
     // Saves multiple driver details
     public List<Driver> saveAll(List<Driver> drivers) {
         return driverRepository.saveAll(drivers);
+    }
+
+    // endpoints to be added in v2
+    // deletes drivers by driverID
+    @Transactional
+    public List<Driver> deleteByDriverID(Long driverID){
+        return driverRepository.deleteByDriverID(driverID);
+    }
+
+    // deletes drivers by driverName
+    @Transactional
+    public List<Driver> deleteByDriverName(String driverName){
+        return driverRepository.deleteByDriverName(driverName);
     }
 }
 

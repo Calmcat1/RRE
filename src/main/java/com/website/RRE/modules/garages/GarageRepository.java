@@ -13,6 +13,8 @@ import java.util.List;
 public interface GarageRepository extends JpaRepository<Garage, Long> {
     List<Garage> findByGarageName(String garageName);
     List<Garage> findByGarageSpeciality(String garageSpeciality);
+    List<Garage> deleteByGarageID(Long garageID);
+    List<Garage> deleteByGarageName(String garageName);
 }
 
 

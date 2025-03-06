@@ -10,25 +10,26 @@ import java.util.List;
 
 @RestController
 @RequestMapping("rre/api/v1/garages")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class GarageController {
 
     @Autowired
     private GarageService garageService;
 
     // Retrieve all garages
-    @GetMapping("/allGarages")
+    @GetMapping
     public List<Garage> getAllGarages() {
         return garageService.findAllGarages();
     }
 
     // Retrieve garages by name
-    @GetMapping("/garageName/{garageName}")
+    @GetMapping("/garage-name/{garageName}")
     public List<Garage> getGaragesByName(@PathVariable String garageName) {
         return garageService.findByGarageName(garageName);
     }
 
     // Retrieve garages by speciality
-    @GetMapping("/garageSpeciality/{garageSpeciality}")
+    @GetMapping("/garages-speciality/{garageSpeciality}")
     public List<Garage> getGaragesBySpeciality(@PathVariable String garageSpeciality) {
         return garageService.findByGarageSpeciality(garageSpeciality);
     }

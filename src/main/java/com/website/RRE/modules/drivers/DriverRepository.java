@@ -10,5 +10,7 @@ import java.util.List;
 public interface DriverRepository extends JpaRepository<Driver, Long> {
     List<Driver> findByDriverName(String driverName);
     List<Driver> findByDriverCarMake(String driverCarMake);
+    List<Driver> deleteByDriverID(Long driverID);
+    List<Driver> deleteByDriverName(String driverName);
 
 }

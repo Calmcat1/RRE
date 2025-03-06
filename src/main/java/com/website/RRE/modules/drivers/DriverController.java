@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("rre/api/v1/drivers")
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class DriverController {
 
     private final DriverService driverService;
@@ -24,13 +25,13 @@ public class DriverController {
     }
 
     // Retrieve drivers by name
-    @GetMapping("/name/{driverName}")
+    @GetMapping("/driver-name/{driverName}")
     public List<Driver> getDriversByName(@PathVariable String driverName) {
         return driverService.findByDriverName(driverName);
     }
 
     // Retrieve drivers by car make
-    @GetMapping("/car-make/{carMake}")
+    @GetMapping("/driver-car-make/{carMake}")
     public List<Driver> getDriversByCarMake(@PathVariable String carMake) {
         return driverService.findByDriverCarMake(carMake);
     }
