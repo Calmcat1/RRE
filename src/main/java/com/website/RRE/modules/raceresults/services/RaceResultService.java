@@ -1,6 +1,8 @@
-package com.website.RRE.modules.raceresults;
+package com.website.RRE.modules.raceresults.services;
 
 
+import com.website.RRE.modules.raceresults.entities.RaceResult;
+import com.website.RRE.modules.raceresults.repositories.RaceResultRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,27 +26,27 @@ public class RaceResultService {
     }
 
     // finds all results
-    List<Map<String, Object>> findAllRaceResults(){
+    public List<Map<String, Object>> findAllRaceResults(){
         return raceResultRepository.findAllRaceResults();
     }
 
     // find race results by best time
-    List<Map<String, Object>> findByRaceResultBestTime(double raceResultBestTime) {
+    public List<Map<String, Object>> findByRaceResultBestTime(double raceResultBestTime) {
         return raceResultRepository.findByRaceResultBestTime(raceResultBestTime);
     }
 
     // find race results by rank
-    List<Map<String, Object>> findByRaceResultRank(int raceResultRank){
+    public List<Map<String, Object>> findByRaceResultRank(int raceResultRank){
         return raceResultRepository.findByRaceResultRank(raceResultRank);
     }
 
     // find race results by event
-    List<Map<String, Object>> findByRaceResultEvent(String raceResultEvent){
+    public List<Map<String, Object>> findByRaceResultEvent(String raceResultEvent){
         return raceResultRepository.findByRaceResultEvent(raceResultEvent);
     }
 
     // find race results by eventActivity
-    List<Map<String, Object>> findByRaceResultEventActivity(String raceResultEventActivity){
+    public List<Map<String, Object>> findByRaceResultEventActivity(String raceResultEventActivity){
         return raceResultRepository.findByRaceResultEventActivity(raceResultEventActivity);
     }
 

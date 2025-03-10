@@ -1,5 +1,7 @@
-package com.website.RRE.modules.drivers;
+package com.website.RRE.modules.drivers.controllers;
 
+import com.website.RRE.modules.drivers.entities.Driver;
+import com.website.RRE.modules.drivers.services.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +49,22 @@ public class DriverController {
     public ResponseEntity<List<Driver>> addMultipleDrivers(@RequestBody List<Driver> drivers) {
         List<Driver> savedDrivers = driverService.saveAll(drivers);
         return ResponseEntity.ok(savedDrivers);
+    }
+
+
+
+    // Delete driver by ID
+    @DeleteMapping("/delete-driver-id/{driverID}")
+    public void deleteGarageByID(@PathVariable Long driverID){
+        driverService.deleteByDriverID(driverID);
+
+    }
+
+    // Delete driver by Name
+    @DeleteMapping("/delete-driver-name/{driverName}")
+    public void deleteGarageByName(@PathVariable String driverName){
+        driverService.deleteByDriverName(driverName);
+
     }
 
 }

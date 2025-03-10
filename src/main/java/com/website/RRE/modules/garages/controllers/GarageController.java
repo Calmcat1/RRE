@@ -1,7 +1,9 @@
-package com.website.RRE.modules.garages;
+package com.website.RRE.modules.garages.controllers;
 
 // Controller layer
 
+import com.website.RRE.modules.garages.entities.Garage;
+import com.website.RRE.modules.garages.services.GarageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -45,6 +47,20 @@ public class GarageController {
     public ResponseEntity<List<Garage>> addMultipleGarages(@RequestBody List<Garage> garages) {
         List<Garage> savedGarages = garageService.saveAll(garages);
         return ResponseEntity.ok(savedGarages);
+    }
+
+    // Delete garage by ID
+    @DeleteMapping("/delete-garage-id/{garageID}")
+    public void deleteGarageByID(@PathVariable Long garageID){
+        garageService.deleteByGarageID(garageID);
+
+    }
+
+    // Delete garage by Name
+    @DeleteMapping("/delete-garage-name/{garageName}")
+    public void deleteGarageByName(@PathVariable String garageName){
+        garageService.deleteByGarageName(garageName);
+
     }
 }
 

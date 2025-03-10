@@ -1,7 +1,9 @@
-package com.website.RRE.modules.raceresults;
+package com.website.RRE.modules.raceresults.controllers;
 
 // result layer
 
+import com.website.RRE.modules.raceresults.entities.RaceResult;
+import com.website.RRE.modules.raceresults.services.RaceResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +13,8 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("rre/api/v1/race-results")
-@CrossOrigin(origins = "http://127.0.0.1:5500")
+@CrossOrigin(origins = {"http://127.0.0.1:5500", "http://127.0.0.1:5501"})
+
 public class RaceResultController {
 
     @Autowired

@@ -1,5 +1,6 @@
-package com.website.RRE.modules.raceresults;
+package com.website.RRE.modules.raceresults.repositories;
 
+import com.website.RRE.modules.raceresults.entities.RaceResult;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -7,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 // repository layer
 
@@ -17,6 +17,7 @@ public interface RaceResultRepository extends JpaRepository<RaceResult, Long> {
    @Query("SELECT r.raceResultID AS raceResultID, r.raceResultRank AS raceResultRank, " +
            "r.raceResultBestTime AS raceResultBestTime, r.raceResultCarNo AS raceResultCarNo, " +
            "r.raceResultEvent AS raceResultEvent, r.raceResultEventActivity AS raceResultEventActivity, " +
+           "r.raceResultYear AS raceResultYear, " +
            "r.driverID AS driverID, r.garageID AS garageID, " +
            "d.driverName AS driverName, d.driverCarMake AS driverCarMake, " +
            "g.garageName AS garageName, g.garageSpeciality AS garageSpeciality " +

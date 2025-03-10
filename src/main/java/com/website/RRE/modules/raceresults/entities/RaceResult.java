@@ -1,8 +1,6 @@
-package com.website.RRE.modules.raceresults;
+package com.website.RRE.modules.raceresults.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.website.RRE.modules.drivers.Driver;
-import com.website.RRE.modules.garages.Garage;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
