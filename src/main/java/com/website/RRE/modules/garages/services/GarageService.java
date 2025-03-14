@@ -1,12 +1,15 @@
 package com.website.RRE.modules.garages.services;
 
+import com.website.RRE.modules.garages.dtos.GarageDto;
 import com.website.RRE.modules.garages.entities.Garage;
 import com.website.RRE.modules.garages.repositories.GarageRepository;
+import com.website.RRE.modules.utils.DTOMapper;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -20,30 +23,41 @@ public class GarageService {
     }
 
     // finds all results
-    public List<Garage> findAllGarages(){
-        return garageRepository.findAll();
+    public List<GarageDto> findAllGarages() {
+        return garageRepository.findAll().stream()
+                .map(DTOMapper::toGarageDTO)
+                .collect(Collectors.toList());
     }
 
     // Finds garages by name
-    public List<Garage> findByGarageName(String garageName) {
-        return garageRepository.findByGarageName(garageName);
+    public List<GarageDto> findByGarageName(String garageName) {
+        return garageRepository.findByGarageName(garageName).stream()
+                .map(DTOMapper::toGarageDTO)
+                .collect(Collectors.toList());
     }
 
     // Finds garages by speciality
-    public List<Garage> findByGarageSpeciality(String speciality) {
-        return garageRepository.findByGarageSpeciality(speciality);
+    public List<GarageDto> findByGarageSpeciality(String speciality) {
+        return garageRepository.findByGarageSpeciality(speciality).stream()
+                .map(DTOMapper::toGarageDTO)
+                .collect(Collectors.toList());
     }
 
     // save garage details
-    public Garage saveGarage(Garage garage) {
-        return garageRepository.save(garage);
+    public GarageDto saveGarage(Garage garage) {
+        Garage savedGarage = garageRepository.save(garage);
+        return DTOMapper.toGarageDTO(savedGarage);
     }
+
 
     // save multiple garage details
-    public List<Garage> saveAll(List<Garage> garages) {
-
-        return garageRepository.saveAll(garages);
+    public List<GarageDto> saveAll(List<Garage> garages) {
+        List<Garage> savedGarages = garageRepository.saveAll(garages);
+        return savedGarages.stream()
+                .map(DTOMapper::toGarageDTO)
+                .collect(Collectors.toList());
     }
+
 
 
     // deletes garages by garageID

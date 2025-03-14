@@ -1,11 +1,14 @@
 package com.website.RRE.modules.drivers.services;
 
+import com.website.RRE.modules.drivers.dtos.DriverDto;
 import com.website.RRE.modules.drivers.entities.Driver;
 import com.website.RRE.modules.drivers.repositories.DriverRepository;
+import com.website.RRE.modules.utils.DTOMapper;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DriverService {
@@ -18,28 +21,42 @@ public class DriverService {
     }
 
     // Finds all drivers
-    public List<Driver> findAllDrivers() {
-        return driverRepository.findAll();
+    public List<DriverDto> findAllDrivers() {
+        return driverRepository.findAll().stream()
+                .map(DTOMapper::toDriverDTO)
+                .collect(Collectors.toList());
     }
 
+
     // Finds drivers by name
-    public List<Driver> findByDriverName(String driverName) {
-        return driverRepository.findByDriverName(driverName);
+    public List<DriverDto> findByDriverName(String driverName) {
+        return driverRepository.findByDriverName(driverName)
+                .stream()
+                .map(DTOMapper::toDriverDTO)
+                .collect(Collectors.toList());
+
     }
 
     // Finds drivers by car make
-    public List<Driver> findByDriverCarMake(String carMake) {
-        return driverRepository.findByDriverCarMake(carMake);
+    public List<DriverDto> findByDriverCarMake(String driverCarMake) {
+        return driverRepository.findByDriverName(driverCarMake)
+                .stream()
+                .map(DTOMapper::toDriverDTO)
+                .collect(Collectors.toList());
     }
 
     // Saves driver details
-    public Driver saveDriver(Driver driver) {
-        return driverRepository.save(driver);
+    public DriverDto saveDriver(Driver driver) {
+        Driver savedDriver = driverRepository.save(driver);
+        return DTOMapper.toDriverDTO(savedDriver);
     }
 
     // Saves multiple driver details
-    public List<Driver> saveAll(List<Driver> drivers) {
-        return driverRepository.saveAll(drivers);
+    public List<DriverDto> saveAll(List<Driver> drivers) {
+        List<Driver> savedDrivers = driverRepository.saveAll(drivers);
+        return savedDrivers.stream()
+                .map(DTOMapper::toDriverDTO)
+                .collect(Collectors.toList());
     }
 
     // endpoints to be added in v2

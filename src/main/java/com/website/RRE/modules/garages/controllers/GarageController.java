@@ -2,6 +2,7 @@ package com.website.RRE.modules.garages.controllers;
 
 // Controller layer
 
+import com.website.RRE.modules.garages.dtos.GarageDto;
 import com.website.RRE.modules.garages.entities.Garage;
 import com.website.RRE.modules.garages.services.GarageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,32 +21,32 @@ public class GarageController {
 
     // Retrieve all garages
     @GetMapping
-    public List<Garage> getAllGarages() {
+    public List<GarageDto> getAllGarages() {
         return garageService.findAllGarages();
     }
 
     // Retrieve garages by name
     @GetMapping("/garage-name/{garageName}")
-    public List<Garage> getGaragesByName(@PathVariable String garageName) {
+    public List<GarageDto> getGaragesByName(@PathVariable String garageName) {
         return garageService.findByGarageName(garageName);
     }
 
     // Retrieve garages by speciality
     @GetMapping("/garages-speciality/{garageSpeciality}")
-    public List<Garage> getGaragesBySpeciality(@PathVariable String garageSpeciality) {
+    public List<GarageDto> getGaragesBySpeciality(@PathVariable String garageSpeciality) {
         return garageService.findByGarageSpeciality(garageSpeciality);
     }
 
     // Save a new garage
     @PostMapping("/add-garage")
-    public Garage saveGarage(@RequestBody Garage garage) {
+    public GarageDto saveGarage(@RequestBody Garage garage) {
         return garageService.saveGarage(garage);
     }
 
     // Save multiple garages
     @PostMapping("/add-garages")
-    public ResponseEntity<List<Garage>> addMultipleGarages(@RequestBody List<Garage> garages) {
-        List<Garage> savedGarages = garageService.saveAll(garages);
+    public ResponseEntity<List<GarageDto>> addMultipleGarages(@RequestBody List<Garage> garages) {
+        List<GarageDto> savedGarages = garageService.saveAll(garages);
         return ResponseEntity.ok(savedGarages);
     }
 

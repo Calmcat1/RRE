@@ -2,13 +2,16 @@ package com.website.RRE.modules.highlights.services;
 
 
 
+import com.website.RRE.modules.highlights.dtos.HighlightDto;
 import com.website.RRE.modules.highlights.entities.Highlight;
 import com.website.RRE.modules.highlights.repositories.HighlightRepository;
+import com.website.RRE.modules.utils.DTOMapper;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class HighlightService {
@@ -22,29 +25,44 @@ public class HighlightService {
     }
 
     // finds all results
-    public List<Highlight> findAllHighlights(){
-        return highlightRepository.findAll();
+    public List<HighlightDto> findAllHighlights() {
+        return highlightRepository.findAll().stream()
+                .map(DTOMapper::toHighlightDTO)
+                .collect(Collectors.toList());
     }
+
 
     // finds Highlights by highlightID
-    public List<Highlight> findByHighlightID(Long highlightID){
-        return highlightRepository.findByHighlightID(highlightID);
+    public List<HighlightDto> findByHighlightID(Long highlightID) {
+        return highlightRepository.findByHighlightID(highlightID).stream()
+                .map(DTOMapper::toHighlightDTO)
+                .collect(Collectors.toList());
     }
+
 
     // finds Highlights by highlightHeading
-    public List<Highlight> findByHighlightHeading(String highlightHeading){
-        return highlightRepository.findByHighlightHeading(highlightHeading);
+    public List<HighlightDto> findByHighlightHeading(String highlightHeading) {
+        return highlightRepository.findByHighlightHeading(highlightHeading).stream()
+                .map(DTOMapper::toHighlightDTO)
+                .collect(Collectors.toList());
     }
+
 
     // save Highlight details
-    public Highlight saveHighlight(Highlight highlight) {
-        return highlightRepository.save(highlight);
+    public HighlightDto saveHighlight(Highlight highlight) {
+        Highlight savedHighlight = highlightRepository.save(highlight);
+        return DTOMapper.toHighlightDTO(savedHighlight);
     }
 
+
     // save multiple Highlight details
-    public List<Highlight> saveAll(List<Highlight> highlights) {
-        return highlightRepository.saveAll(highlights);
+    public List<HighlightDto> saveAll(List<Highlight> highlights) {
+        List<Highlight> savedHighlights = highlightRepository.saveAll(highlights);
+        return savedHighlights.stream()
+                .map(DTOMapper::toHighlightDTO)
+                .collect(Collectors.toList());
     }
+
 
     // deletes highlights by highlightID
     @Transactional

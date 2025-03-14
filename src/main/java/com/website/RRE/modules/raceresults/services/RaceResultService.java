@@ -1,6 +1,8 @@
 package com.website.RRE.modules.raceresults.services;
 
 
+import com.website.RRE.modules.raceresults.dtos.RaceResultDto;
+import com.website.RRE.modules.utils.DTOMapper;
 import com.website.RRE.modules.raceresults.entities.RaceResult;
 import com.website.RRE.modules.raceresults.repositories.RaceResultRepository;
 import jakarta.transaction.Transactional;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 // service layer
@@ -26,47 +29,71 @@ public class RaceResultService {
     }
 
     // finds all results
-    public List<Map<String, Object>> findAllRaceResults(){
-        return raceResultRepository.findAllRaceResults();
+    public List<RaceResultDto> findAllRaceResults() {
+        List<Map<String, Object>> rawResults = raceResultRepository.findAllRaceResults();
+        return rawResults.stream()
+                .map(DTOMapper::toRaceResultDTO)
+                .collect(Collectors.toList());
     }
 
     // find race results by best time
-    public List<Map<String, Object>> findByRaceResultBestTime(double raceResultBestTime) {
-        return raceResultRepository.findByRaceResultBestTime(raceResultBestTime);
+    public List<RaceResultDto> findByRaceResultBestTime(double raceResultBestTime) {
+        List<Map<String, Object>> rawResults = raceResultRepository.findByRaceResultBestTime(raceResultBestTime);
+        return rawResults.stream()
+                .map(DTOMapper::toRaceResultDTO) // Assuming the toRaceResultDTO method is correctly implemented
+                .collect(Collectors.toList());
     }
+
 
     // find race results by rank
-    public List<Map<String, Object>> findByRaceResultRank(int raceResultRank){
-        return raceResultRepository.findByRaceResultRank(raceResultRank);
+    public List<RaceResultDto> findByRaceResultRank(int raceResultRank) {
+        List<Map<String, Object>> rawResults = raceResultRepository.findByRaceResultRank(raceResultRank);
+        return rawResults.stream()
+                .map(DTOMapper::toRaceResultDTO) // Ensure this method correctly maps from Map<String, Object> to RaceResultDto
+                .collect(Collectors.toList());
     }
+
 
     // find race results by event
-    public List<Map<String, Object>> findByRaceResultEvent(String raceResultEvent){
-        return raceResultRepository.findByRaceResultEvent(raceResultEvent);
+    public List<RaceResultDto> findByRaceResultEvent(String raceResultEvent) {
+        List<Map<String, Object>> rawResults = raceResultRepository.findByRaceResultEvent(raceResultEvent);
+        return rawResults.stream()
+                .map(DTOMapper::toRaceResultDTO) // Ensure this method correctly converts Map<String, Object> to RaceResultDto
+                .collect(Collectors.toList());
     }
+
 
     // find race results by eventActivity
-    public List<Map<String, Object>> findByRaceResultEventActivity(String raceResultEventActivity){
-        return raceResultRepository.findByRaceResultEventActivity(raceResultEventActivity);
+    public List<RaceResultDto> findByRaceResultEventActivity(String raceResultEventActivity) {
+        List<Map<String, Object>> rawResults = raceResultRepository.findByRaceResultEventActivity(raceResultEventActivity);
+        return rawResults.stream()
+                .map(DTOMapper::toRaceResultDTO) // Convert Map<String, Object> to RaceResultDto
+                .collect(Collectors.toList());
     }
+
 
     // find race results by eventYear
-    List<Map<String, Object>> findByRaceResultYear(String raceResultYear){
-        return raceResultRepository.findByRaceResultYear(raceResultYear);
+    public List<RaceResultDto> findByRaceResultYear(String raceResultYear) {
+        List<Map<String, Object>> rawResults = raceResultRepository.findByRaceResultYear(raceResultYear);
+        return rawResults.stream()
+                .map(DTOMapper::toRaceResultDTO) // Convert Map<String, Object> to RaceResultDto
+                .collect(Collectors.toList());
     }
 
 
 
-    // save a race result
-    public RaceResult saveResult(RaceResult result) {
-        return raceResultRepository.save(result);
+     // save a race result
+     public RaceResult saveResult(RaceResult result) {
+         return raceResultRepository.save(result);
 
-    }
+     }
 
     //saves multiple racing results
     public List<RaceResult> saveAll(List<RaceResult> raceResults) {
         return raceResultRepository.saveAll(raceResults);
     }
+
+
 
     //deletes racing events
     @Transactional

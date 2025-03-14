@@ -1,5 +1,6 @@
 package com.website.RRE.modules.highlights.controllers;
 
+import com.website.RRE.modules.highlights.dtos.HighlightDto;
 import com.website.RRE.modules.highlights.services.HighlightService;
 import com.website.RRE.modules.highlights.entities.Highlight;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,32 +20,32 @@ public class HighlightController {
 
     // Retrieve all highlights
     @GetMapping
-    public List<Highlight> getAllHighlights() {
+    public List<HighlightDto> getAllHighlights() {
         return highlightService.findAllHighlights();
     }
 
     // Retrieve highlights by id
     @GetMapping("/highlight-id/{highlightID}")
-    public List<Highlight> getHighlightsByID(@PathVariable Long highlightID) {
+    public List<HighlightDto> getHighlightsByID(@PathVariable Long highlightID) {
         return highlightService.findByHighlightID(highlightID);
     }
 
     // Retrieve highlights by heading
     @GetMapping("/highlight-heading/{highlightHeading}")
-    public List<Highlight> getHighlightsByHeading(@PathVariable String highlightHeading) {
+    public List<HighlightDto> getHighlightsByHeading(@PathVariable String highlightHeading) {
         return highlightService.findByHighlightHeading(highlightHeading);
     }
 
     // save a new highlight
     @PostMapping("/add-highlight")
-    public Highlight saveHighlight(@RequestBody Highlight highlight) {
+    public HighlightDto saveHighlight(@RequestBody Highlight highlight) {
         return highlightService.saveHighlight(highlight);
     }
 
     // Save multiple highlights
     @PostMapping("/add-highlights")
-    public ResponseEntity<List<Highlight>> addMultipleHighlights(@RequestBody List<Highlight> highlights) {
-        List<Highlight> savedHighlights = highlightService.saveAll(highlights);
+    public ResponseEntity<List<HighlightDto>> addMultipleHighlights(@RequestBody List<Highlight> highlights) {
+        List<HighlightDto> savedHighlights = highlightService.saveAll(highlights);
         return ResponseEntity.ok(savedHighlights);
     }
 

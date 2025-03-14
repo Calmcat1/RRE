@@ -52,17 +52,4 @@ public class RaceResult {
     @JsonProperty("garageID")
     private Long garageID;
 
-//    // rre_driver table for join
-//    @ManyToOne
-//    @JoinColumn(name = "driver_id", referencedColumnName = "garage_id")
-//    private Driver driver;
-//
-//    // garage table
-//    @ManyToOne
-//    @JoinColumn(name = "garage_id", referencedColumnName = "garage_id")
-//    private Garage garage;
-
-
-
-
 }
