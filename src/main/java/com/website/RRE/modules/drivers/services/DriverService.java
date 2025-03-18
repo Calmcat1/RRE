@@ -51,6 +51,24 @@ public class DriverService {
         return DTOMapper.toDriverDTO(savedDriver);
     }
 
+    // Updates driver details
+    public DriverDto updateDriver(Long driverID, DriverDto driverDto) {
+
+        Driver driver = driverRepository.findById(driverID)
+                .orElseThrow(() -> new RuntimeException("Driver not found"));
+
+        // Only update fields if they are provided
+        if (driverDto.getDriverName() != null) {
+            driver.setDriverName(driverDto.getDriverName());
+        }
+        if (driverDto.getDriverCarMake() != null) {
+            driver.setDriverCarMake(driverDto.getDriverCarMake());
+        }
+
+        Driver savedDriver = driverRepository.save(driver);
+        return DTOMapper.toDriverDTO(savedDriver);
+    }
+
     // Saves multiple driver details
     public List<DriverDto> saveAll(List<Driver> drivers) {
         List<Driver> savedDrivers = driverRepository.saveAll(drivers);
@@ -59,7 +77,7 @@ public class DriverService {
                 .collect(Collectors.toList());
     }
 
-    // endpoints to be added in v2
+    // endpoints to be added in v2 -- added
     // deletes drivers by driverID
     @Transactional
     public void deleteByDriverID(Long driverID){
@@ -71,5 +89,7 @@ public class DriverService {
     public void deleteByDriverName(String driverName){
         driverRepository.deleteByDriverName(driverName);
     }
+
+
 }
 

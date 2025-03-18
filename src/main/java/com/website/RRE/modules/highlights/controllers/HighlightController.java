@@ -49,6 +49,16 @@ public class HighlightController {
         return ResponseEntity.ok(savedHighlights);
     }
 
+
+    // Update highlight by ID (PATCH)
+    @PatchMapping("/{highlightID}")
+    public ResponseEntity<HighlightDto> updateHighlight(
+            @PathVariable Long highlightID,
+            @RequestBody HighlightDto highlightDto) {
+        HighlightDto updatedHighlight = highlightService.updateHighlight(highlightID, highlightDto);
+        return ResponseEntity.ok(updatedHighlight);
+    }
+
     // Delete Highlights by ID
     @DeleteMapping("/delete-highlight-id/{highlightID}")
     public void deleteHighlightByID(@PathVariable Long highlightID){

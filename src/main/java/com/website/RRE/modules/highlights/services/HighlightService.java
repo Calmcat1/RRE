@@ -64,6 +64,31 @@ public class HighlightService {
     }
 
 
+    // Update Highlight details
+    @Transactional
+    public HighlightDto updateHighlight(Long highlightID, HighlightDto highlightDto) {
+        Highlight highlight = highlightRepository.findById(highlightID)
+                .orElseThrow(() -> new RuntimeException("Highlight not found with ID: " + highlightID));
+
+        // update fields if they are provided
+        if (highlightDto.getHighlightHeading() != null) {
+            highlight.setHighlightHeading(highlightDto.getHighlightHeading());
+        }
+        if (highlightDto.getHighlightDescription() != null) {
+            highlight.setHighlightDescription(highlightDto.getHighlightDescription());
+        }
+        if (highlightDto.getHighlightImagePath() != null) {
+            highlight.setHighlightImagePath(highlightDto.getHighlightImagePath());
+        }
+        if (highlightDto.getHighlightDate() != null) {
+            highlight.setHighlightDate(highlightDto.getHighlightDate());
+        }
+
+        Highlight updatedHighlight = highlightRepository.save(highlight);
+        return DTOMapper.toHighlightDTO(updatedHighlight);
+    }
+
+
     // deletes highlights by highlightID
     @Transactional
     public void deleteByHighlightID(Long highlightID){

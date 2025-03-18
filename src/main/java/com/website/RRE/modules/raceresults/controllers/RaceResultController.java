@@ -54,19 +54,30 @@ public class RaceResultController {
     // Get race results by event year
 
 
-//    // Save a new race result
-//    @PostMapping("/add-race-result")
-//    public RaceResult saveResult(@RequestBody RaceResult result) {
-//        System.out.println("Received RaceResult: " + result);
-//        return raceResultService.saveResult(result);
-//
-//    }
+    // Save a new race result
+    @PostMapping("/add-race-result")
+    public RaceResultDto saveResult(@RequestBody RaceResult result) {
+        System.out.println("Received RaceResult: " + result);
+        return raceResultService.saveResult(result);
+
+   }
 
     // Save multiple racing results
     @PostMapping("/add-race-results")
-    public ResponseEntity<List<RaceResult>> addMultipleRaceResults(@RequestBody List<RaceResult> raceResults) {
-        List<RaceResult> savedRaceResults = raceResultService.saveAll(raceResults);
+    public ResponseEntity<List<RaceResultDto>> addMultipleRaceResults(@RequestBody List<RaceResult> raceResults) {
+        List<RaceResultDto> savedRaceResults = raceResultService.saveAll(raceResults);
         return ResponseEntity.ok(savedRaceResults);
+    }
+
+
+    // Update race results
+    // Update race result by ID (PATCH)
+    @PatchMapping("/{raceResultID}")
+    public ResponseEntity<RaceResultDto> updateRaceResult(
+            @PathVariable Long raceResultID,
+            @RequestBody RaceResultDto raceResultDto) {
+        RaceResultDto updatedRaceResult = raceResultService.updateRaceResult(raceResultID, raceResultDto);
+        return ResponseEntity.ok(updatedRaceResult);
     }
 
     // Delete a race result

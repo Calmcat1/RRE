@@ -50,6 +50,16 @@ public class GarageController {
         return ResponseEntity.ok(savedGarages);
     }
 
+
+    // Update garage by ID (PATCH)
+    @PatchMapping("/{garageID}")
+    public ResponseEntity<GarageDto> updateGarage(
+            @PathVariable Long garageID,
+            @RequestBody GarageDto garageDto) {
+        GarageDto updatedGarage = garageService.updateGarage(garageID, garageDto);
+        return ResponseEntity.ok(updatedGarage);
+    }
+
     // Delete garage by ID
     @DeleteMapping("/delete-garage-id/{garageID}")
     public void deleteGarageByID(@PathVariable Long garageID){

@@ -67,5 +67,18 @@ public class DriverController {
 
     }
 
+    // Update driver fields partially
+    // PATCH endpoint to update driver by ID
+    @PatchMapping("/{driverID}")
+    public ResponseEntity<DriverDto> updateDriver(
+            @PathVariable Long driverID,
+            @RequestBody DriverDto driverDto) {
+
+        DriverDto updatedDriver = driverService.updateDriver(driverID, driverDto);
+        return ResponseEntity.ok(updatedDriver);
+    }
+
+
+
 }
 

@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.website.RRE.modules.utils.DTOMapper.raceResultToMap;
+
 
 // service layer
 
@@ -82,15 +84,59 @@ public class RaceResultService {
 
 
 
-     // save a race result
-     public RaceResult saveResult(RaceResult result) {
-         return raceResultRepository.save(result);
+    // save a race result
+    public RaceResultDto saveResult(RaceResult result) {
+        RaceResult savedResult = raceResultRepository.save(result);
+        Map<String, Object> resultMap = raceResultToMap(savedResult);
+        return DTOMapper.toRaceResultDTO(resultMap);
+    }
 
-     }
+    // save multiple race results
+    public List<RaceResultDto> saveAll(List<RaceResult> raceResults) {
+        List<RaceResult> savedResults = raceResultRepository.saveAll(raceResults);
+        return savedResults.stream()
+                .map(result -> {
+                    Map<String, Object> resultMap = raceResultToMap(result);
+                    return DTOMapper.toRaceResultDTO(resultMap);
+                })
+                .collect(Collectors.toList());
+    }
 
-    //saves multiple racing results
-    public List<RaceResult> saveAll(List<RaceResult> raceResults) {
-        return raceResultRepository.saveAll(raceResults);
+
+    // Updates race results
+    @Transactional
+    public RaceResultDto updateRaceResult(Long raceResultID, RaceResultDto raceResultDto) {
+        RaceResult raceResult = raceResultRepository.findById(raceResultID)
+                .orElseThrow(() -> new RuntimeException("Race result not found with ID: " + raceResultID));
+
+        // Only update fields if they are provided
+        if (raceResultDto.getRaceResultRank() != null) {
+            raceResult.setRaceResultRank(raceResultDto.getRaceResultRank());
+        }
+        if (raceResultDto.getRaceResultCarNo() != null) {
+            raceResult.setRaceResultCarNo(raceResultDto.getRaceResultCarNo());
+        }
+        if (raceResultDto.getRaceResultBestTime() != null) {
+            raceResult.setRaceResultBestTime(raceResultDto.getRaceResultBestTime());
+        }
+        if (raceResultDto.getRaceResultEvent() != null) {
+            raceResult.setRaceResultEvent(raceResultDto.getRaceResultEvent());
+        }
+        if (raceResultDto.getRaceResultEventActivity() != null) {
+            raceResult.setRaceResultEventActivity(raceResultDto.getRaceResultEventActivity());
+        }
+        if (raceResultDto.getRaceResultYear() != null) {
+            raceResult.setRaceResultYear(raceResultDto.getRaceResultYear());
+        }
+        if (raceResultDto.getDriverID() != null){
+            raceResult.setDriverID(raceResultDto.getDriverID());
+        }
+        if (raceResultDto.getGarageID() != null){
+            raceResult.setGarageID(raceResultDto.getGarageID());
+        }
+
+        RaceResult updatedRaceResult = raceResultRepository.save(raceResult);
+        return DTOMapper.toRaceResultDTO(raceResultToMap(updatedRaceResult));
     }
 
 
@@ -100,6 +146,8 @@ public class RaceResultService {
     public void deleteByRaceResultID(Long raceResultID) {
         raceResultRepository.deleteById(raceResultID);
     }
+
+
 
 
 }

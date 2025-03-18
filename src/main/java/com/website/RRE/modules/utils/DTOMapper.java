@@ -11,10 +11,9 @@ import com.website.RRE.modules.raceresults.entities.RaceResult;
 import com.website.RRE.modules.highlights.entities.Highlight;
 import org.springframework.stereotype.Component;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Map;
 
-import static com.website.RRE.modules.utils.ConvertToDate.convertToDate;
 
 @Component
 public class DTOMapper {
@@ -37,11 +36,26 @@ public class DTOMapper {
                 ((Number) raceResult.get("raceResultCarNo")).intValue(),
                 (String) raceResult.get("raceResultEvent"),
                 (String) raceResult.get("raceResultEventActivity"),
-                convertToDate(raceResult.get("raceResultYear")), // Ensure the database returns a Date object
+                (Date) raceResult.get("raceResultYear"), // Ensure the database returns a Date object
                 ((Number) raceResult.get("driverID")).longValue(),
                 ((Number) raceResult.get("garageID")).longValue(),
                 (String) raceResult.get("driverName"),
                 (String) raceResult.get("garageName")
+        );
+    }
+
+    // convert entity to map
+    public static Map<String, Object> raceResultToMap(RaceResult raceResult) {
+        return Map.of(
+                "raceResultID", raceResult.getRaceResultID(),
+                "raceResultRank", raceResult.getRaceResultRank(),
+                "raceResultCarNo", raceResult.getRaceResultCarNo(),
+                "raceResultBestTime", raceResult.getRaceResultBestTime(),
+                "raceResultEvent", raceResult.getRaceResultEvent(),
+                "raceResultEventActivity", raceResult.getRaceResultEventActivity(),
+                "raceResultYear", raceResult.getRaceResultYear(),
+                "driverID", raceResult.getDriverID(),
+                "garageID", raceResult.getGarageID()
         );
     }
 

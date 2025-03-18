@@ -58,6 +58,24 @@ public class GarageService {
                 .collect(Collectors.toList());
     }
 
+    // Update garage details
+    @Transactional
+    public GarageDto updateGarage(Long garageID, GarageDto garageDto) {
+        Garage garage = garageRepository.findById(garageID)
+                .orElseThrow(() -> new RuntimeException("Garage with ID " + garageID + " not found"));
+
+        // Only update fields if they are provided
+        if (garageDto.getGarageName() != null) {
+            garage.setGarageName(garageDto.getGarageName());
+        }
+        if (garageDto.getGarageSpeciality() != null) {
+            garage.setGarageSpeciality(garageDto.getGarageSpeciality());
+        }
+
+        Garage updatedGarage = garageRepository.save(garage);
+        return DTOMapper.toGarageDTO(updatedGarage);
+    }
+
 
 
     // deletes garages by garageID

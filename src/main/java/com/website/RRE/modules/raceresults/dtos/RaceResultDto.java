@@ -12,10 +12,10 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RaceResultDto {
-        private long raceResultID;
-        private int raceResultRank;
-        private double raceResultBestTime;
-        private int raceResultCarNo;
+        private Long raceResultID;
+        private Integer raceResultRank;
+        private Double raceResultBestTime;
+        private Integer raceResultCarNo;
         private String raceResultEvent;
         private String raceResultEventActivity;
         private Date raceResultYear;
