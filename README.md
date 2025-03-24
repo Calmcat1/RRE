@@ -2,6 +2,13 @@
 
 🚗 **RRE (Race Results and Events)** is a platform for managing **race results and highlights**, for car racing enthusiasts.
 
+### **v1**
+🔹 **Upload** Highlights, RaceResults, Garages and Drivers
+🔹 **Get** Highlights, RaceResults, Garages and Drivers
+🔹 **Delete** Highlights, RaceResults, Garages and Drivers
+🔹 **Update** Highlights, RaceResults, Garages and Drivers
+
+
 ---
 
 ## **📜 Features**
