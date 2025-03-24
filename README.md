@@ -4,8 +4,11 @@
 
 ### **v1**
 🔹 **Upload** Highlights, RaceResults, Garages and Drivers
+
 🔹 **Get** Highlights, RaceResults, Garages and Drivers
+
 🔹 **Delete** Highlights, RaceResults, Garages and Drivers
+
 🔹 **Update** Highlights, RaceResults, Garages and Drivers
 
 
