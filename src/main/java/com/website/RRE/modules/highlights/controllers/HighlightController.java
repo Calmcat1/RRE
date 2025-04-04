@@ -6,6 +6,7 @@ import com.website.RRE.modules.highlights.entities.Highlight;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("rre/api/v1/highlights")
-@CrossOrigin(origins = {"http://127.0.0.1:5500", "http://127.0.0.1:5501"})
+@CrossOrigin(origins = {"http://127.0.0.1:5500", "http://127.0.0.1:5501" , "http://localhost:5173"})
 public class HighlightController {
     @Autowired
     private HighlightService highlightService;
@@ -37,25 +38,27 @@ public class HighlightController {
     }
 
     // save a new highlight
-    @PostMapping("/add-highlight")
-    public HighlightDto saveHighlight(@RequestBody Highlight highlight) {
-        return highlightService.saveHighlight(highlight);
+    @PostMapping(value = "/add-highlight", consumes = "multipart/form-data")
+    public HighlightDto saveHighlight(@RequestPart Highlight highlight,  @RequestPart(value = "file", required = false) MultipartFile file) {
+        return highlightService.saveHighlight(highlight, file);
     }
 
     // Save multiple highlights
-    @PostMapping("/add-highlights")
-    public ResponseEntity<List<HighlightDto>> addMultipleHighlights(@RequestBody List<Highlight> highlights) {
-        List<HighlightDto> savedHighlights = highlightService.saveAll(highlights);
+    @PostMapping(value = "/add-highlights", consumes = "multipart/form-data")
+    public ResponseEntity<List<HighlightDto>> addMultipleHighlights(@RequestBody List<Highlight> highlights, @RequestBody List<MultipartFile> files) {
+        List<HighlightDto> savedHighlights = highlightService.saveAll(highlights, files);
         return ResponseEntity.ok(savedHighlights);
     }
 
 
-    // Update highlight by ID (PATCH)
-    @PatchMapping("/{highlightID}")
+    // Update Highlights
+    @PatchMapping(value = "/{highlightID}", consumes = "multipart/form-data")
     public ResponseEntity<HighlightDto> updateHighlight(
             @PathVariable Long highlightID,
-            @RequestBody HighlightDto highlightDto) {
-        HighlightDto updatedHighlight = highlightService.updateHighlight(highlightID, highlightDto);
+            @RequestPart("highlightDto") HighlightDto highlightDto,
+            @RequestPart(value = "file", required = false) MultipartFile file) {
+
+        HighlightDto updatedHighlight = highlightService.updateHighlight(highlightID, highlightDto, file);
         return ResponseEntity.ok(updatedHighlight);
     }
 

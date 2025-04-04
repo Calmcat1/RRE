@@ -13,8 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("rre/api/v1/race-results")
-@CrossOrigin(origins = {"http://127.0.0.1:5500", "http://127.0.0.1:5501"})
-
+@CrossOrigin(origins = {"http://127.0.0.1:5500", "http://127.0.0.1:5501", "http://localhost:5173"})
 public class RaceResultController {
 
     @Autowired

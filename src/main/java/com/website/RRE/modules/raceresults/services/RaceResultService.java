@@ -83,7 +83,6 @@ public class RaceResultService {
     }
 
 
-
     // save a race result
     public RaceResultDto saveResult(RaceResult result) {
         RaceResult savedResult = raceResultRepository.save(result);
