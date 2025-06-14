@@ -23,4 +23,5 @@ public class RaceResultDto {
         private Long garageID;
         private String garageName;
         private String driverName;
+        private String garageSpeciality;
 }

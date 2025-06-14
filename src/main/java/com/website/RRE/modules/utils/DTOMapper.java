@@ -40,7 +40,8 @@ public class DTOMapper {
                 ((Number) raceResult.get("driverID")).longValue(),
                 ((Number) raceResult.get("garageID")).longValue(),
                 (String) raceResult.get("driverName"),
-                (String) raceResult.get("garageName")
+                (String) raceResult.get("garageName"),
+                (String) raceResult.get("garageSpeciality")
         );
     }
 
