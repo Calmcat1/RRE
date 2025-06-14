@@ -12,12 +12,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "rre_highlights", schema="rre",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = "highlightHeading"), // unique constraint
-                @UniqueConstraint(columnNames = "highlightDescription") // unique constraint
-        }
-)
+@Table(name = "rre_highlights", schema="rre")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -29,12 +24,9 @@ public class Highlight {
     @JsonProperty("highlightID")
     private Long highlightID;
 
-    @Column(nullable = false, unique = true)
     @JsonProperty("highlightHeading")
     private String highlightHeading;
 
-
-    @Column(nullable = false, unique = true)
     @JsonProperty("highlightDescription")
     private String highlightDescription;
 

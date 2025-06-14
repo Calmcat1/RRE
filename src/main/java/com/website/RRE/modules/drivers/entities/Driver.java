@@ -10,11 +10,7 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name = "rre_drivers", schema="rre",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = "driverName") //unique constraint
-        }
-)
+@Table(name = "rre_drivers", schema="rre")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,7 +21,7 @@ public class Driver {
     @JsonProperty("driverID")
     private Long driverID;
 
-    @Column(nullable = false, unique = true)
+
     @JsonProperty("driverName")
     private String driverName;
 
