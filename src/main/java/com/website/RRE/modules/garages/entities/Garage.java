@@ -13,7 +13,10 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name = "rre_garages", schema="rre")
+@Table(name = "rre_garages", schema="rre",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "garageName") // unique constraint
+        })
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,6 +27,7 @@ public class Garage {
     @JsonProperty("garageID")
     private Long garageID;
 
+    @Column(nullable = false, unique = true)
     @JsonProperty("garageName")
     private String garageName;
 
